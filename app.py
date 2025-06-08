@@ -4,7 +4,7 @@ import shutil
 import subprocess
 import socketserver
 import threading
-import requests
+import requests  
 from flask import Flask
 import json
 import time
@@ -15,17 +15,17 @@ app = Flask(__name__)
 # Set environment variables
 FILE_PATH = os.environ.get('FILE_PATH', './tmp')
 PROJECT_URL = os.environ.get('URL', '') # 填写项目分配的url可实现自动访问，例如：https://www.google.com，留空即不启用该功能
-INTERVAL_SECONDS = int(os.environ.get("TIME", 120))                         # 访问间隔时间，默认120s，单位：秒
-UUID = os.environ.get('UUID', '0004add9-5c68-8bab-870c-08cd5320df00')       # UUID
-NEZHA_SERVER = os.environ.get('NEZHA_SERVER', 'nezha.jaxmike.nyc.mn')                  # 哪吒3个变量不全不运行
+INTERVAL_SECONDS = int(os.environ.get("TIME", 120))                         # 访问间隔时间，默认120s，单位：秒  
+UUID = os.environ.get('UUID', 'baa465d6-7db7-46c2-b19b-4e81894e90aa')       # UUID          
+NEZHA_SERVER = os.environ.get('NEZHA_SERVER', 'nezha1.lele.pp.ua:80')                  # 哪吒3个变量不全不运行                                      
 NEZHA_PORT = os.environ.get('NEZHA_PORT', '443')                           # 哪吒端口为{443,8443,2096,2097,2083}其中之一时自动开启tls
-NEZHA_KEY = os.environ.get('NEZHA_KEY', '7Ztx5GOcgFRTTsMjmI')                                 # 哪吒客户端密钥
-ARGO_DOMAIN = os.environ.get('ARGO_DOMAIN', 'modal.jaxmike.nyc.mn')                             # 国定隧道域名，留空即启用临时隧道
-ARGO_AUTH = os.environ.get('ARGO_AUTH', 'eyJhIjoiN2QzZTQ2YjIzYzllYmM5ODQxYjI1MTkyN2I2NjA4NmMiLCJ0IjoiNDdiMDYyNzUtMGE5OS00NTk5LWFiMDQtNGI1NjNhYWFiZjMyIiwicyI6Ill6YzFOek0xTkRVdE9ERmxZaTAwWmpnMkxUZ3pZakV0TURSbE1EZzJNelZpWTJaayJ9')                                 # 国定隧道json或token，留空即启用临时隧道,json获取地址：https://fscarmen.cloudflare.now.cc
+NEZHA_KEY = os.environ.get('NEZHA_KEY', '1ODXLKEnEqTKhD373iuTExpswl0oDwgi')                                 # 哪吒客户端密钥                                      
+ARGO_DOMAIN = os.environ.get('ARGO_DOMAIN', 'modal.070605.xyz')                             # 国定隧道域名，留空即启用临时隧道                                      
+ARGO_AUTH = os.environ.get('ARGO_AUTH', '{"AccountTag":"d91b52857ded51c1201d8c22e6ba6920","TunnelSecret":"eHZyLGqsNOw6qlhnVdr3BXCrwSffSdIv3bWknfwPe40=","TunnelID":"edcce91f-dc1b-4dbf-b053-5473627a39a4","Endpoint":""}')                                 # 国定隧道json或token，留空即启用临时隧道,json获取地址：https://fscarmen.cloudflare.now.cc                                                  
 ARGO_PORT = int(os.environ.get('ARGO_PORT', 8001))                          # Argo端口，固定隧道token请改回8080或在cf后台设置的端口与这里对应
-CFIP = os.environ.get('CFIP', 'www.visa.com.tw')                            # 优选域名或优选ip
+CFIP = os.environ.get('CFIP', 'www.visa.com.tw')                            # 优选域名或优选ip          
 CFPORT = int(os.environ.get('CFPORT', 443))                                 # 优选域名或优选ip对应端口
-NAME = os.environ.get('NAME', 'modal')                                        # 节点名称
+NAME = os.environ.get('NAME', 'modal')                                        # 节点名称  
 
 # Create directory if it doesn't exist
 if not os.path.exists(FILE_PATH):
@@ -35,7 +35,7 @@ else:
     print(f"{FILE_PATH} already exists")
 
 # Clean old files
-paths_to_delete = ['boot.log', 'list.txt','sub.txt', 'npm', 'web', 'bot', 'tunnel.yml', 'tunnel.json']
+paths_to_delete = ['boot.log', 'list.txt','sub.txt', 'npm', 'web', 'bot', 'tunnel.yml', 'tunnel.json']  
 for file in paths_to_delete:
     file_path = os.path.join(FILE_PATH, file)
     try:
